@@ -87,15 +87,15 @@ hdzapi.loadServer = function(whichPlayer, key)
         return
     end
     local idx = hplayer.index(whichPlayer)
-    if (cache.serverData[key] == nil) then
-        cache.serverData[key] = {}
-        if (cache.serverData[key][idx] == nil) then
+    if (cache.serverData[whichPlayer][key] == nil) then
+        cache.serverData[whichPlayer][key] = {}
+        if (cache.serverData[whichPlayer][key][idx] == nil) then
             if (true == hjapi.GetPlayerServerValueSuccess(whichPlayer)) then
-                cache.serverData[key][idx] = hjapi.DzAPI_Map_GetServerValue(whichPlayer, key) or ""
+                cache.serverData[whichPlayer][key][idx] = hjapi.DzAPI_Map_GetServerValue(whichPlayer, key) or ""
             end
         end
     end
-    return cache.serverData[key][idx]
+    return cache.serverData[whichPlayer][key][idx]
 end
 hdzapi.loadServerBool = function(whichPlayer, key)
     return "1" == (hdzapi.loadServer(whichPlayer, key) or "0")
